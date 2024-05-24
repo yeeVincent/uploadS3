@@ -1,7 +1,9 @@
 import { S3ClientConfig } from "@aws-sdk/client-s3";
 
 export interface IConfig {
+  /** 需要上传的文件路径 */
   filePath: string;
+  /** 上传到服务器的路径 */
   remotePath: string;
 }
 
