@@ -17,13 +17,10 @@ export const upload = async (props: {
     distDir: path.resolve("./", filePath),
     remoteDir: `${remotePath}`,
   };
-  // 传入文件夹，上传文件夹下的所有文件，如果有子文件夹递归上传，区分test和prod环境，上传路径不同
   const uploadDir = async (
     folderPath: string,
     s3FolderKey: string
   ): Promise<void> => {
-    console.log("folderPath", folderPath, path.resolve("./", filePath));
-
     const entries = fs.readdirSync(uploadConfig.distDir, {
       withFileTypes: true,
     });
@@ -47,17 +44,3 @@ export const upload = async (props: {
     await refreshCloudFront(`/${remotePath}/*`);
   }
 };
-
-/** 脚本执行参考 */
-/**
- * @LOCAL_PATH 本地根目录的相对路径
- * @REMOTE_PATH 上传到cdn的路径
- * @NODE_ENV  cdn，这里值固定
- * @S3_ENV  dev | prod
- */
-
-/** 上传到external目录下live2d，到assets目录下，测试环境 */
-// LOCAL_PATH=external REMOTE_PATH=assets NODE_ENV=cdn S3_ENV=dev node ./scripts/uploadAssetsToCdn.ts
-
-/** 上传到assets下的所有资源到cdn，测试环境 */
-// LOCAL_PATH=src/assets REMOTE_PATH=assets node NODE_ENV=cdn S3_ENV=dev ./scripts/uploadAssetsToCdn.ts
