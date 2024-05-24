@@ -14,7 +14,7 @@ import mime from "mime-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { S3Config } from "./config";
+import { S3Config } from "./config.js";
 import { CreateInvalidationCommandOutput } from "@aws-sdk/client-cloudfront";
 
 const __filename = fileURLToPath(import.meta.url);
