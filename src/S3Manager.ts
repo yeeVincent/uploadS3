@@ -26,6 +26,7 @@ class S3Manager {
 
   constructor(config: S3Config, uploadConfig: UploadConfig) {
     this.config = config;
+
     this.uploadConfig = uploadConfig;
     this.s3Client = new S3Client({
       region: this.config.region,
@@ -60,7 +61,7 @@ class S3Manager {
     );
   }
 
-  async uploadFile(filePath: string, remotePath: string) {
+  uploadFile = async (filePath: string, remotePath: string) => {
     if (!path.isAbsolute(filePath))
       throw new Error(`uploadFile::filePath: ${filePath} is not absolute path`);
 
@@ -87,9 +88,9 @@ class S3Manager {
       console.log(err);
       throw err;
     }
-  }
+  };
 
-  async uploadDir(dirAbsolutePath: string, remotePath: string) {
+  uploadDir = async (dirAbsolutePath: string, remotePath: string) => {
     const asyncFilesList: Promise<any>[] = [];
     const uploadDirRecursive = async (
       dirPath: string,
@@ -141,9 +142,9 @@ class S3Manager {
     };
 
     return uploadDirRecursive(dirAbsolutePath, dirAbsolutePath);
-  }
+  };
 
-  refreshCloudFront(path: string) {
+  refreshCloudFront = (path: string) => {
     console.log("refreshCloudFront", path);
     return new Promise<CreateInvalidationCommandOutput>((resolve, reject) => {
       const params: CreateInvalidationCommandInput = {
@@ -168,7 +169,7 @@ class S3Manager {
           reject(err);
         });
     });
-  }
+  };
 
   checkRefreshCloudFront(id: string) {
     return new Promise<CreateInvalidationCommandOutput>((resolve, reject) => {

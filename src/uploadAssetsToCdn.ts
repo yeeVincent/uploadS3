@@ -3,18 +3,6 @@ import { PutObjectCommandOutput } from "@aws-sdk/client-s3";
 import fs from "node:fs";
 import path from "node:path";
 
-const S3_ENV = process.env.S3_ENV === "prod" ? "prod" : "dev";
-const local_relative_path = process.env.LOCAL_PATH
-  ? process.env.LOCAL_PATH
-  : "src/assets";
-const remote_base_path = process.env.REMOTE_PATH
-  ? process.env.REMOTE_PATH
-  : "assets";
-const uploadConfig = {
-  distDir: path.resolve("./", local_relative_path),
-  remoteDir: `${S3_ENV}/${remote_base_path}`,
-};
-
 export const upload = async (props: {
   filePath: string;
   remotePath: string;
@@ -25,19 +13,27 @@ export const upload = async (props: {
   ) => Promise<PutObjectCommandOutput>;
 }): Promise<void> => {
   const { filePath, remotePath, refreshCloudFront, uploadFile } = props;
-
+  const uploadConfig = {
+    distDir: path.resolve("./", filePath),
+    remoteDir: `${remotePath}`,
+  };
   // 传入文件夹，上传文件夹下的所有文件，如果有子文件夹递归上传，区分test和prod环境，上传路径不同
-  const findAndUploadDir = async (
+  const uploadDir = async (
     folderPath: string,
     s3FolderKey: string
   ): Promise<void> => {
-    const entries = fs.readdirSync(folderPath, { withFileTypes: true });
+    console.log("folderPath", folderPath, path.resolve("./", filePath));
+
+    const entries = fs.readdirSync(uploadConfig.distDir, {
+      withFileTypes: true,
+    });
+
     const uploadPromises = entries.map(async (entry) => {
       const fullPath = path.join(folderPath, entry.name);
+      console.log(fullPath, entry.name);
       const entryS3Key = path.join(s3FolderKey, entry.name);
-      if (entry.isFile()) return uploadFile(fullPath, entryS3Key);
-      else if (entry.isDirectory())
-        return findAndUploadDir(fullPath, entryS3Key);
+      if (entry.isFile()) return uploadFile(path.resolve(fullPath), entryS3Key);
+      else if (entry.isDirectory()) return uploadDir(fullPath, entryS3Key);
     });
 
     await Promise.all(uploadPromises);
@@ -45,7 +41,7 @@ export const upload = async (props: {
 
   if (uploadConfig.distDir) {
     // 上传资源文件
-    await findAndUploadDir(filePath, remotePath);
+    await uploadDir(filePath, remotePath);
     // 刷新cloudfront
     console.log("refreshCloudFront", `/${remotePath}/*`, uploadConfig);
     await refreshCloudFront(`/${remotePath}/*`);
