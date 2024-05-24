@@ -1,6 +1,26 @@
 {
+	
+		"name": "xizhi-uploads3",
+		"version": "1.0.0",
+		"description": "A package for uploading assets to S3 and refreshing CloudFront",
+		"main": "dist/uploadS3.js",
+		"types": "dist/uploadS3.d.ts",
+		"scripts": {
+			"build": "tsc"
+		},
+		"files": [
+			"dist/**/*"
+		],
+		"keywords": ["s3, upload"],
+		"author": "yee",
+		"license": "ISC",
 	"dependencies": {
-		"@aws-sdk/client-s3": "^3.583.0",
-		"@aws-sdk/client-cloudfront": "^3.583.0"
+		"@aws-sdk/client-cloudfront": "^3.583.0",
+		"@aws-sdk/client-s3": "^3.583.0"
+	},
+	"devDependencies": {
+		"@types/mime-types": "^2.1.4",
+		"@types/node": "^20.12.12",
+		"typescript": "^5.4.5"
 	}
 }
