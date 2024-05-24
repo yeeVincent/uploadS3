@@ -15,18 +15,18 @@ import mime from "mime-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { S3Config } from "./uploadType";
+import { S3Config, UploadConfig } from "./uploadType";
 
 const __filename = fileURLToPath(import.meta.url);
 class S3Manager {
   private s3Client: S3Client;
   private cloudFrontClient: CloudFrontClient;
   private config: S3Config;
-  private uploadConfig: { distDir: string; remoteDir: string };
+  private uploadConfig: UploadConfig;
 
-  constructor(config: S3Config) {
+  constructor(config: S3Config, uploadConfig: UploadConfig) {
     this.config = config;
-
+    this.uploadConfig = uploadConfig;
     this.s3Client = new S3Client({
       region: this.config.region,
       credentials: {
@@ -44,8 +44,8 @@ class S3Manager {
     });
 
     this.uploadConfig = {
-      distDir: path.resolve("./", this.config.outDir),
-      remoteDir: this.config.remoteDir,
+      distDir: path.resolve("./", this.uploadConfig.distDir),
+      remoteDir: this.uploadConfig.remoteDir,
     };
 
     this.s3Client.middlewareStack.add(

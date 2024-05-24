@@ -2,12 +2,11 @@
 	"name": "xizhi-uploads3",
 	"version": "1.0.0",
 	"description": "A package for uploading assets to S3 and refreshing CloudFront",
-	"main": "dist/uploadS3.js",
-	"types": "dist/uploadS3.d.ts",
+	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
 		"build": "tsc",
-		"test": "pnpm build && node dist/uploadS3.js "
+		"test": "pnpm build && node dist/main.js "
 	},
 	"files": [
 		"dist/**/*"

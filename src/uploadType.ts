@@ -1,7 +1,6 @@
 import { S3ClientConfig } from "@aws-sdk/client-s3";
 
 export interface IConfig {
-  s3Config: S3Config;
   filePath: string;
   remotePath: string;
 }
@@ -14,6 +13,11 @@ export interface S3Config extends S3ClientConfig {
   origin: string;
   accessKeyId: string;
   secretAccessKey: string;
+  // remoteDir: string;
+  // outDir: string;
+}
+
+export interface UploadConfig {
+  distDir: string;
   remoteDir: string;
-  outDir: string;
 }
