@@ -6,7 +6,7 @@
   "type": "module",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "webpack && tsc",
+    "build": "webpack && tsc && node scripts/add-js-extension.js",
     "test": "pnpm build && node dist/index.js"
   },
   "files": [

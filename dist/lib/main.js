@@ -1,5 +1,5 @@
-import S3Manager from "./S3Manager";
-import { upload } from "./uploadAssetsToCdn";
+import S3Manager from "./S3Manager.js";
+import { upload } from "./uploadAssetsToCdn.js";
 const main = (Config) => {
     const s3Config = Config;
     return ({ filePath, remotePath }) => {
