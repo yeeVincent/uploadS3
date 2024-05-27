@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist/types",
+    "declarationDir": "./dist",
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "node",
@@ -10,5 +10,6 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["dist"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "xizhi-uploads3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package for uploading assets to S3 and refreshing CloudFront",
   "main": "dist/index.js",
   "type": "module",
