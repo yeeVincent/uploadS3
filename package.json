@@ -1,29 +1,32 @@
 {
-	"name": "xizhi-uploads3",
-	"version": "1.0.1",
-	"description": "A package for uploading assets to S3 and refreshing CloudFront",
-	"main": "dist/main.js",
-	"type": "module",
-	"scripts": {
-		"build": "tsc",
-		"test": "pnpm build && node dist/main.js "
-	},
-	"files": [
-		"dist/**/*"
-	],
-	"keywords": [
-		"s3, upload"
-	],
-	"author": "yee",
-	"license": "ISC",
-	"dependencies": {
-		"@aws-sdk/client-cloudfront": "^3.583.0",
-		"@aws-sdk/client-s3": "^3.583.0",
-		"mime-types": "^2.1.35"
-	},
-	"devDependencies": {
-		"@types/mime-types": "^2.1.4",
-		"@types/node": "^20.12.12",
-		"typescript": "^5.4.5"
-	}
+  "name": "xizhi-uploads3",
+  "version": "1.0.1",
+  "description": "A package for uploading assets to S3 and refreshing CloudFront",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "webpack && tsc",
+    "test": "pnpm build && node dist/main.js"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "s3, upload"
+  ],
+  "author": "yee",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudfront": "^3.583.0",
+    "@aws-sdk/client-s3": "^3.583.0",
+    "mime-types": "^2.1.35"
+  },
+  "devDependencies": {
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "ts-loader": "^9.4.2"
+  }
 }

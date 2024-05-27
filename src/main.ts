@@ -1,6 +1,6 @@
-import S3Manager from "./S3Manager.js";
-import { upload } from "./uploadAssetsToCdn.js";
-import { IConfig, S3Config } from "./uploadType.js";
+import S3Manager from "./S3Manager";
+import { upload } from "./uploadAssetsToCdn";
+import { IConfig, S3Config } from "./uploadType";
 
 const main = (Config: S3Config) => {
   const s3Config = Config;
