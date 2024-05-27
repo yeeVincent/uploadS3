@@ -2,11 +2,12 @@
   "name": "xizhi-uploads3",
   "version": "1.0.2",
   "description": "A package for uploading assets to S3 and refreshing CloudFront",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "type": "module",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "webpack && tsc",
-    "test": "pnpm build && node dist/main.js"
+    "test": "pnpm build && node dist/index.js"
   },
   "files": [
     "dist/**/*"
@@ -24,9 +25,10 @@
   "devDependencies": {
     "@types/mime-types": "^2.1.4",
     "@types/node": "^20.12.12",
+    "clean-webpack-plugin": "^4.0.0",
+    "ts-loader": "^9.4.2",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
-    "ts-loader": "^9.4.2"
+    "webpack-cli": "^5.1.4"
   }
 }

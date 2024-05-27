@@ -1,11 +1,12 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: "./src/main.ts",
+  entry: "./src/index.ts", // 入口文件
   target: "node", // 确保 Webpack 以 Node.js 环境为目标
   module: {
     rules: [
@@ -20,11 +21,17 @@ export default {
     extensions: [".ts", ".js"],
   },
   output: {
-    filename: "main.js",
+    filename: "index.js", // 输出文件名
     path: path.resolve(__dirname, "dist"),
     library: {
       type: "commonjs2", // 使用 CommonJS 模块系统
     },
   },
-  mode: "development", // 或 'production'，根据需要选择
+  plugins: [new CleanWebpackPlugin()],
+  externals: {
+    "@aws-sdk/client-cloudfront": "commonjs @aws-sdk/client-cloudfront",
+    "@aws-sdk/client-s3": "commonjs @aws-sdk/client-s3",
+    "mime-types": "commonjs mime-types",
+  },
+  mode: "production", // 使用 production 模式以进行优化
 };
