@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/mime-types": "^2.1.4",
     "@types/node": "^20.12.12",
+    "babel-plugin-module-resolver": "^5.0.2",
     "clean-webpack-plugin": "^4.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.4.5",

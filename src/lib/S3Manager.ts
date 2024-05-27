@@ -17,7 +17,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { S3Config, UploadConfig } from "./uploadType";
 
-const __filename = fileURLToPath(import.meta.url);
 class S3Manager {
   private s3Client: S3Client;
   private cloudFrontClient: CloudFrontClient;
